@@ -2,6 +2,8 @@ package com.ubs.opsit.interviews;
 
 import java.util.Arrays;
 
+import static java.lang.System.lineSeparator;
+import static org.apache.commons.lang.StringUtils.repeat;
 import static org.apache.commons.lang.Validate.notEmpty;
 
 /**
@@ -13,7 +15,7 @@ public class BerlinClock implements TimeConverter {
     private static final String YELLOW = "Y";
     private static final String RED = "R";
     private static final String OFF = "O";
-    private static final String LINE_SEPARATOR = "\r\n";
+    private static final String LINE_SEPARATOR = lineSeparator();
 
     @Override
     public String convertTime(String aTime) {
@@ -68,18 +70,9 @@ public class BerlinClock implements TimeConverter {
         return seconds % 2 == 0 ? YELLOW : OFF;
     }
 
-    private String getLamps(int numberOfLamps, int onLampsNumber, String lamp) {
-        String row = "";
-
-        for (int i = 0; i < onLampsNumber; i++) {
-            row += lamp;
-        }
-
-        for (int i = 0; i < numberOfLamps - onLampsNumber; i++) {
-            row += OFF;
-        }
-
-        return row;
+    private String getLamps(int lampsInARow, int litLamps, String lampType) {
+        return repeat(lampType, litLamps) +
+                repeat(OFF, lampsInARow - litLamps);
     }
 
     private int getBottomRowLampNumber(int timePart) {
