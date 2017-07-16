@@ -34,7 +34,7 @@ public class BerlinClock implements TimeConverter {
 
     private StringBuilder buildClock(String[] splitTime) {
         int[] convertedTime = Arrays.stream(splitTime).mapToInt(Integer::parseInt).toArray();
-        StringBuilder clockBuilder = new StringBuilder();
+        StringBuilder clockBuilder = new StringBuilder(40);
 
         clockBuilder.append(getSecondsLamp(convertedTime[2]));
         clockBuilder.append(LINE_SEPARATOR);
